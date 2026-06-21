@@ -13,3 +13,6 @@ resources:
 
 service:
   type: ClusterIP
+
+autoscaling:
+  enabled: false
