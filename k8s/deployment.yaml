@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: hello-world
-          image: leyevge/hello-world:v1
+          image: leyevge/hello-world:v2
           ports:
             - containerPort: 5000
           resources:

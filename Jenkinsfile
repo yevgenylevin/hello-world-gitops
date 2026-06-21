@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         IMAGE_NAME = "leyevge/hello-world"
-        IMAGE_TAG = "v1"
+        IMAGE_TAG = "v2"
         DOCKERHUB_CREDENTIALS = "dockerhub-credentials"
     }
 
