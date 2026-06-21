@@ -22,6 +22,18 @@ pipeline {
             }
         }
 
+        stage('Trivy Security Scan') {
+            steps {
+                sh '''
+                    trivy image \
+                      --severity CRITICAL \
+                      --exit-code 1 \
+                      --no-progress \
+                      ${IMAGE_NAME}:${IMAGE_TAG}
+                '''
+            }
+        }
+
         stage('Push Docker Image') {
             steps {
                 script {
