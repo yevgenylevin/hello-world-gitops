@@ -1,0 +1,35 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: hello-world-canary
+  namespace: hello-world-canary
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: hello-world-canary
+  template:
+    metadata:
+      labels:
+        app: hello-world-canary
+    spec:
+      containers:
+        - name: hello-world
+          image: leyevge/hello-world:v3
+          ports:
+            - containerPort: 5000
+          resources:
+            requests:
+              cpu: 50m
+              memory: 64Mi
+            limits:
+              cpu: 100m
+              memory: 128Mi
+  strategy:
+    canary:
+      steps:
+        - setWeight: 20
+        - pause: {}
+        - setWeight: 50
+        - pause: {}
+        - setWeight: 100
