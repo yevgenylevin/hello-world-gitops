@@ -6,7 +6,7 @@ This project demonstrates a complete DevOps workflow for a containerized Flask a
 
 The application exposes:
 
-* `/` — returns `Hello World`
+* `/` — returns `Hello World version 3`
 * `/health` — returns a JSON health response
 
 The project includes:
