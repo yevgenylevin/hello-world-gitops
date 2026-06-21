@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: hello-world-dev
+  namespace: argocd
+spec:
+  project: default
+
+  sources:
+    - repoURL: https://github.com/yevgenylevin/hello-world-gitops.git
+      targetRevision: main
+      path: helm/hello-world
+      helm:
+        releaseName: hello-world-dev
+        valueFiles:
+          - $values/environments/dev/values.yaml
+
+    - repoURL: https://github.com/yevgenylevin/hello-world-gitops.git
+      targetRevision: main
+      ref: values
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: hello-world-dev
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
